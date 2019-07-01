@@ -3,16 +3,19 @@ import discord
 import random
 
 # loads a list of quotes from quotes.json
-quote_file = open("quotes.json", "r")
-quote_json = json.load(quote_file)
-quotes = quote_json["quotes"]
-quote_file.close()
+with open("quotes.json", "r") as qf:
+    quotes_json = json.load(qf)
+    quotes = quotes_json["quotes"]
 
 # loads bot token from config.json
-config_file = open("config.json", "r")
-config_json = json.load(config_file)
-bot_token = config_json["token"]
-config_file.close()
+with open("config.json", "r") as cf:
+    config_json = json.load(cf)
+    bot_token = config_json["token"]
+
+# loads a list of sound filenames from sounds.json
+with open("sounds.json", "r") as sf:
+    sounds_json = json.load(sf)
+    sounds = sounds_json["sounds"]
 
 # create a client
 client = discord.Client()
