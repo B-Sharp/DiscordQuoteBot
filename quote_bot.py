@@ -17,6 +17,9 @@ with open("sounds.json", "r") as sf:
     sounds_json = json.load(sf)
     sounds = sounds_json["sounds"]
 
+# pairs each quote with its sound filename
+mapped_pairs = list(zip(quotes, sounds))
+
 # create a client
 client = discord.Client()
 
@@ -30,8 +33,10 @@ async def on_message(msg):
     # if the bot is mentioned select a random quote and send it
     for mention in msg.mentions:
         if mention == client.user:
-            random_quote = random.choice(quotes)
-            await msg.channel.send(random_quote)
+            random_pair = random.choice(mapped_pairs)
+            await msg.channel.send(random_pair[0])
+            voice_client = await msg.author.voice.channel.connect();
+            voice_client.play(discord.FFmpegPCMAudio("sounds\\" + random_pair[1]), after=lambda e: voice_client.loop.create_task(voice_client.disconnect()))
 
 # run the bot
 client.run(bot_token)
