@@ -1,6 +1,6 @@
 {
-    "quotes": [
-        "Your Mother was a Hamster, and your Father smelt of Elderberries!",
-        "Now go away or I will taunt you a second time."
-    ]
+    "quotes": {
+        "Your Mother was a Hamster, and your Father smelt of Elderberries!" : "audio_filename",
+        "Now go away or I will taunt you a second time." : "audio_filename"
+    }
 }
