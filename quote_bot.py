@@ -28,11 +28,14 @@ def main():
             if mention == client.user:
                 random_quote = random.choice(list(quotes))
                 
-                await msg.channel.send(random_quote)
-                
-                if quotes[random_quote]:
-                    voice_client = await msg.author.voice.channel.connect();
-                    voice_client.play(discord.FFmpegPCMAudio("sounds\\" + quotes[random_quote]), after=lambda e: voice_client.loop.create_task(voice_client.disconnect()))
+                # check if the bot is already connected to the channel
+                if client.user not in msg.author.voice.channel.members:
+                    await msg.channel.send(random_quote)
+                    
+                    # check if the quote has a sound file
+                    if quotes[random_quote]:
+                        voice_client = await msg.author.voice.channel.connect();
+                        voice_client.play(discord.FFmpegPCMAudio("sounds\\" + quotes[random_quote]), after=lambda e: voice_client.loop.create_task(voice_client.disconnect()))
 
     # run the bot
     client.run(bot_token)
