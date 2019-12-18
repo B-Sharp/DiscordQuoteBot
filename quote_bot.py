@@ -28,8 +28,8 @@ def main():
             if mention == client.user:
                 random_quote = random.choice(list(quotes))
                 
-                # check if the bot is already connected to the channel
-                if client.user not in msg.author.voice.channel.members:
+                # check if the user is not in any channel or if the bot is already connected to the channel
+                if msg.author.voice is None or client.user not in msg.author.voice.channel.members:
                     await msg.channel.send(random_quote)
                     
                     # check if the quote has a sound file
